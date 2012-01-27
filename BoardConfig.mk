@@ -80,8 +80,6 @@ BOARD_FLASH_BLOCK_SIZE := 131072
 WITH_DEXPREOPT := false
 
 # Graphics
-# Use RGB565 surfaces until userspace drivers are upgraded
-BOARD_NO_RGBX_8888 := true
 BOARD_AVOID_DRAW_TEXTURE_EXTENSION := true
 TARGET_LIBAGL_USE_GRALLOC_COPYBITS := true
 BOARD_EGL_CFG := device/motorola/motus/egl.cfg
