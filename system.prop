@@ -35,6 +35,7 @@ dalvik.vm.heapsize=24m
 ro.media.dec.jpeg.memcap=20000000
 
 # Persist default parameters
+persist.sys.scrollingcache=2
 persist.sys.use_dithering=1
 persist.sys.purgeable_assets=0
 
