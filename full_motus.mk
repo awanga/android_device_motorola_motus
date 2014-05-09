@@ -40,17 +40,16 @@ PRODUCT_PROPERTY_OVERRIDES += \
         ro.error.receiver.system.apps=com.google.android.feedback \
         ro.com.google.clientidbase=android-att-us \
         ro.com.google.locationfeatures=1 \
+	ro.config.low_ram=true \
         ro.config.vc_call_vol_steps=7 \
-        ro.telephony.call_ring.multiple=false \
-        ro.telephony.call_ring.delay=1000 \
-        ro.url.safetylegal=http://www.motorola.com/staticfiles/Support/legal/?model=MB300 \
-        ro.setupwizard.enable_bypass=1 \
-        dalvik.vm.lockprof.threshold=500 \
         ro.media.dec.aud.wma.enabled=1 \
         ro.media.dec.vid.wmv.enabled=1 \
-	ro.config.low_ram=true \
+        ro.telephony.call_ring.multiple=false \
+        ro.telephony.call_ring.delay=1000 \
+        ro.setupwizard.enable_bypass=1 \
+        ro.url.safetylegal=http://www.motorola.com/staticfiles/Support/legal/?model=MB300 \
+        dalvik.vm.lockprof.threshold=500 \
 	dalvik.vm.jit.codecachesize=0
-
 
 DEVICE_PACKAGE_OVERLAYS += device/motorola/motus/overlay
 
