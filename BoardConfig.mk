@@ -28,6 +28,8 @@ USE_CAMERA_STUB := true
 # inherit from the proprietary version
 -include vendor/motorola/motus/BoardConfigVendor.mk
 
+TARGET_BOARD_INFO_FILE ?= device/motorola/motus/board-info.txt
+
 # Hardware
 TARGET_BOARD_PLATFORM := msm7k
 TARGET_ARCH := arm
