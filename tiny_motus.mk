@@ -30,7 +30,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     device/motorola/motus/init.motus.rc:root/init.motus.rc \
     device/motorola/motus/ueventd.motus.rc:root/ueventd.motus.rc \
-    device/motorola/motus/fstab.motus:system/etc/fstab.motus
+    device/motorola/motus/fstab.motus:root/fstab.motus
 
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.config.low_ram=true \

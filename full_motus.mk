@@ -33,7 +33,7 @@ endif
 PRODUCT_COPY_FILES += \
     device/motorola/motus/init.motus.rc:root/init.motus.rc \
     device/motorola/motus/ueventd.motus.rc:root/ueventd.motus.rc \
-    device/motorola/motus/fstab.motus:system/etc/fstab.motus
+    device/motorola/motus/fstab.motus:root/fstab.motus
 
 ## (3)  Finally, the least specific parts, i.e. the non-GSM-specific aspects
 PRODUCT_PROPERTY_OVERRIDES += \
