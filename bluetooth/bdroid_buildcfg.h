@@ -20,4 +20,8 @@
 #define BTM_DEF_LOCAL_NAME "Motorola Backflip"
 #define BTA_DISABLE_DELAY 100 /* in milliseconds */
 
+#define BLE_INCLUDED FALSE
+#define BTA_GATT_INCLUDED FALSE
+#define SMP_INCLUDED FALSE
+
 #endif
