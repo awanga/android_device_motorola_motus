@@ -47,3 +47,5 @@
 # ************************************************
 # NEWER CLEAN STEPS MUST BE AT THE END OF THE LIST
 # ************************************************
+
+$(call add-clean-step, rm -f $(TARGET_OUT)/build.prop)
