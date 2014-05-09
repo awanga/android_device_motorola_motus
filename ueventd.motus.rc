@@ -26,3 +26,5 @@
 
 /dev/block/mmcblk0p1      0644   root      root
 
+# Compatibility with older kernels
+/dev/console              0660   root       system

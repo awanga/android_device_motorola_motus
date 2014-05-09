@@ -1,0 +1,11 @@
+# Android fstab file.
+# The filesystem that contains the filesystem checker binary (typically /system) cannot
+# specify MF_CHECK, and must come before any filesystems that do specify MF_CHECK
+
+# Mounts the first usable partition of the specified device
+#<src>                                              <mnt_point>     <type>  <mnt_flags and options>  <fs_mgr_flags>
+/dev/block/platform/msm_sdcc.1/mmc_host/mmc0        /sdcard         vfat    defaults                 defaults
+/dev/block/mtdblock1                                /system         yaffs2  barrier=1                wait
+/dev/block/mtdblock2                                /data           yaffs2  noatime,nosuid,nodev,barrier=1,errors=panic wait,check
+/dev/block/mtdblock5                                /cache          yaffs2  noatime,nosuid,nodev,barrier=1,errors=panic wait,check
+/dev/block/zram0                                    none            swap    defaults                 zramsize=201326592

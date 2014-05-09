@@ -24,9 +24,16 @@ $(call inherit-product, device/common/gps/gps_us_supl.mk)
 
 ## (1) First, the most specific values, i.e. the aspects that are specific to GSM
 
+ifeq ($(TARGET_PREBUILT_KERNEL),)
+LOCAL_KERNEL := device/motorola/motus/kernel
+else
+LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
+endif
+
 PRODUCT_COPY_FILES += \
     device/motorola/motus/init.motus.rc:root/init.motus.rc \
-    device/motorola/motus/ueventd.motus.rc:root/ueventd.motus.rc
+    device/motorola/motus/ueventd.motus.rc:root/ueventd.motus.rc \
+    device/motorola/motus/fstab.motus:system/etc/fstab.motus
 
 ## (3)  Finally, the least specific parts, i.e. the non-GSM-specific aspects
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -40,20 +47,23 @@ PRODUCT_PROPERTY_OVERRIDES += \
         ro.setupwizard.enable_bypass=1 \
         dalvik.vm.lockprof.threshold=500 \
         ro.media.dec.aud.wma.enabled=1 \
-        ro.media.dec.vid.wmv.enabled=1
+        ro.media.dec.vid.wmv.enabled=1 \
+	ro.config.low_ram=true \
+	dalvik.vm.jit.codecachesize=0
+
 
 DEVICE_PACKAGE_OVERLAYS += device/motorola/motus/overlay
 
 PRODUCT_COPY_FILES += \
-    frameworks/base/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
-    frameworks/base/data/etc/android.hardware.camera.flash-autofocus.xml:system/etc/permissions/android.hardware.camera.flash-autofocus.xml \
-    frameworks/base/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
-    frameworks/base/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
-    frameworks/base/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
-    frameworks/base/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml \
-    frameworks/base/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
-    frameworks/base/data/etc/android.hardware.touchscreen.multitouch.distinct.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.distinct.xml \
-    frameworks/base/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml
+    frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
+    frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml:system/etc/permissions/android.hardware.camera.flash-autofocus.xml \
+    frameworks/native/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
+    frameworks/native/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
+    frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
+    frameworks/native/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml \
+    frameworks/native/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
+    frameworks/native/data/etc/android.hardware.touchscreen.multitouch.distinct.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.distinct.xml \
+    frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml
 
 PRODUCT_PACKAGES += \
     librs_jni \
@@ -84,9 +94,6 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 # Passion uses high-density artwork where available
 PRODUCT_LOCALES += mdpi
 
-PRODUCT_COPY_FILES += \
-    device/motorola/motus/vold.fstab:system/etc/vold.fstab
-
 # Keylayouts & keychars
 PRODUCT_COPY_FILES += \
     device/motorola/motus/keychars/adp5588_motus.kcm.bin:system/usr/keychars/adp5588_motus.kcm.bin \
@@ -104,12 +111,6 @@ PRODUCT_COPY_FILES += \
     device/motorola/motus/keylayout/qwerty.kl:system/usr/keylayout/qwerty.kl \
     device/motorola/motus/keylayout/touchscreen.kl:system/usr/keylayout/touchscreen.kl
 
-ifeq ($(TARGET_PREBUILT_KERNEL),)
-LOCAL_KERNEL := device/motorola/motus/kernel
-else
-LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
-endif
-
 PRODUCT_COPY_FILES += \
     device/motorola/motus/setrecovery/prebuilt:recovery/root/sbin/setrecovery
 
@@ -120,14 +121,17 @@ PRODUCT_COPY_FILES += \
 $(call inherit-product-if-exists, vendor/motorola/motus/motus-vendor.mk)
 
 PRODUCT_COPY_FILES += \
-    device/motorola/motus/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
-    device/motorola/motus/dhcpcd.conf:system/etc/dhcpcd/dhcpcd.conf \
+    device/motorola/motus/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant_overlay.conf \
     device/motorola/motus/btenable.sh:system/bin/btenable.sh \
     device/motorola/motus/media_profiles.xml:system/etc/media_profiles.xml \
     device/motorola/motus/sysctl.conf:system/etc/sysctl.conf \
     device/motorola/motus/disable-notification-led.sh:system/etc/init.d/70disable-notification-led
+#   device/motorola/motus/dhcpcd.conf:system/etc/dhcpcd/dhcpcd.conf
 
 $(call inherit-product, build/target/product/full_base.mk)
 
-PRODUCT_NAME := generic_motus
+PRODUCT_NAME := full_motus
 PRODUCT_DEVICE := motus
+PRODUCT_BRAND := Android
+PRODUCT_MODEL := Backflip
+PRODUCT_MANUFACTURER := Motorola

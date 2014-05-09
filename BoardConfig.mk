@@ -30,9 +30,11 @@ USE_CAMERA_STUB := true
 
 # Hardware
 TARGET_BOARD_PLATFORM := msm7k
+TARGET_ARCH := arm
 TARGET_ARCH_VARIANT := armv6j
 TARGET_CPU_ABI := armeabi-v6j
 TARGET_CPU_ABI2 := armeabi
+TARGET_CPU_VARIANT := generic
 BOARD_VENDOR_USE_AKMD := akm8973
 BOARD_USES_QCOM_LIBS := true
 TARGET_BOOTLOADER_BOARD_NAME := motus
@@ -50,7 +52,7 @@ JS_ENGINE := v8
 
 # WiFi
 BOARD_WPA_SUPPLICANT_DRIVER := WEXT
-WPA_SUPPLICANT_VERSION      := VER_0_5_X
+WPA_SUPPLICANT_VERSION      := VER_0_8_X
 BOARD_WLAN_DEVICE           := bcm4325
 WIFI_DRIVER_MODULE_PATH     := "/system/lib/dhd.ko"
 WIFI_DRIVER_MODULE_ARG      := "firmware_path=/system/etc/wifi/sdio-g-cdc-reclaim-wme.bin nvram_path=/system/etc/wifi/nvram.txt"
@@ -59,6 +61,10 @@ WIFI_DRIVER_MODULE_NAME     := "dhd"
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR ?= device/motorola/motus/bluetooth
+
+PRODUCT_AAPT_CONFIG := small normal
+PRODUCT_AAPT_PREF_CONFIG := normal
 
 # fix this up by examining /proc/mtd on a running device
 # # dev:    size   erasesize  name
@@ -104,3 +110,11 @@ TARGET_RECOVERY_PRE_COMMAND := "setrecovery recovery"
 BOARD_CUSTOM_RECOVERY_KEYMAPPING:= ../../device/motorola/motus/recovery/recovery_ui.c
 
 TARGET_PREBUILT_RECOVERY_KERNEL := device/motorola/motus/recovery_kernel
+
+#BOARD_SEPOLICY_DIRS := \
+#        sepolicy
+#
+#BOARD_SEPOLICY_UNION := \
+#        genfs_contexts \
+#        file_contexts
+

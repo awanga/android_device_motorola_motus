@@ -1,0 +1,8 @@
+#rild
+/dev/block/mmcblk0p1            u:object_r:radio_device:s0
+
+#The devices and files used by the hciattach service are device specific
+/dev/ttyHS0                     u:object_r:hci_attach_dev:s0
+
+# Accelerometer
+/dev/lis331dlh                  u:object_r:accelerometer_device:s0
