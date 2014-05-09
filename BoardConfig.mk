@@ -37,11 +37,15 @@ TARGET_ARCH_VARIANT := armv6j
 TARGET_CPU_ABI := armeabi-v6j
 TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_VARIANT := generic
-BOARD_VENDOR_USE_AKMD := akm8973
-BOARD_USES_QCOM_LIBS := true
 TARGET_BOOTLOADER_BOARD_NAME := motus
 TARGET_NO_BOOTLOADER := true
+TARGET_PROVIDES_INIT_TARGET_RC := true
 TARGET_OTA_ASSERT_DEVICE := motu,motus
+BOARD_VENDOR_USE_AKMD := akm8973
+BOARD_USES_QCOM_LIBS := true
+
+# Enable dalvik startup with a low memory footprint
+TARGET_ARCH_LOWMEM := true
 
 # Kernel
 TARGET_PREBUILT_KERNEL := device/motorola/motus/kernel
@@ -93,6 +97,8 @@ TARGET_LIBAGL_USE_GRALLOC_COPYBITS := true
 BOARD_EGL_CFG := device/motorola/motus/egl.cfg
 TARGET_SF_NEEDS_REAL_DIMENSIONS := true
 TARGET_SKIA_USE_MORE_MEMORY := true
+BOARD_USE_SKIA_LCDTEXT := true
+DEFAULT_FB_NUM := 2
 
 # GPS
 BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := msm7k
@@ -114,7 +120,7 @@ BOARD_CUSTOM_RECOVERY_KEYMAPPING:= ../../device/motorola/motus/recovery/recovery
 TARGET_PREBUILT_RECOVERY_KERNEL := device/motorola/motus/recovery_kernel
 
 #BOARD_SEPOLICY_DIRS := \
-#        sepolicy
+#        device/motorola/motus/sepolicy
 #
 #BOARD_SEPOLICY_UNION := \
 #        genfs_contexts \
