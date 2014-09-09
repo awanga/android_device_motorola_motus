@@ -59,7 +59,10 @@ JS_ENGINE := v8
 # WiFi
 BOARD_WPA_SUPPLICANT_DRIVER := WEXT
 WPA_SUPPLICANT_VERSION      := VER_0_8_X
-BOARD_WLAN_DEVICE           := bcm4325
+BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_bcmdhd
+BOARD_HOSTAPD_DRIVER        := WEXT
+BOARD_HOSTAPD_PRIVATE_LIB   := lib_driver_cmd_bcmdhd
+BOARD_WLAN_DEVICE           := bcmdhd
 WIFI_DRIVER_MODULE_PATH     := "/system/lib/dhd.ko"
 WIFI_DRIVER_MODULE_ARG      := "firmware_path=/system/etc/wifi/sdio-g-cdc-reclaim-wme.bin nvram_path=/system/etc/wifi/nvram.txt"
 WIFI_DRIVER_MODULE_NAME     := "dhd"
