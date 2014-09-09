@@ -20,9 +20,19 @@
 #include <fcntl.h>
 #include <errno.h>
 
-
 //Older device for motus
 #define THE_DEVICE "/sys/class/vibrator/vibrator/enable"
+
+int vibrator_exists()
+{
+    int fd;
+
+    fd = open(THE_DEVICE, O_RDWR);
+    if(fd < 0)
+        return 0;
+    close(fd);
+    return 1;
+}
 
 int sendit(int timeout_ms)
 {
