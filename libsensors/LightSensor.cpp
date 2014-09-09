@@ -87,7 +87,7 @@ int LightSensor::readEvents(sensors_event_t* data, int count)
 
     while (count && mInputReader.readEvent(&event)) {
         int type = event->type;
-         LOGI("LightSensor: event received (type=%d, code=%d, value=%d)",
+         ALOGI("LightSensor: event received (type=%d, code=%d, value=%d)",
                     type, event->code, event->value);
         if (type == EV_LED) { // light sensor 1
             if (event->code == EVENT_TYPE_LIGHT) {
@@ -108,7 +108,7 @@ int LightSensor::readEvents(sensors_event_t* data, int count)
             count--;
             numEventReceived++;
         } else {
-            LOGE("LightSensor: unknown event (type=%d, code=%d)",
+            ALOGE("LightSensor: unknown event (type=%d, code=%d)",
                     type, event->code);
         }
         mInputReader.next();

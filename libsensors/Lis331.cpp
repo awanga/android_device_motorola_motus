@@ -85,7 +85,7 @@ int LisSensor::enable(int32_t handle, int en)
     err = err < 0 ? -errno : 0;
     close(sAccelModeFD);
 
-    LOGE_IF(err, "writing old-style LIS331DLH_IOCTL_SET_ENABLE failed (%s)", strerror(-err));
+    ALOGE_IF(err, "writing old-style LIS331DLH_IOCTL_SET_ENABLE failed (%s)", strerror(-err));
 
     if (!err) {
         mEnabled = newState;
@@ -104,7 +104,7 @@ int LisSensor::setDelay(int32_t handle, int64_t ns)
             return -EINVAL;
 
         unsigned long delay = ns / 1000000;
-        LOGE("Setting delay to %d", delay);
+        ALOGE("Setting delay to %d", delay);
 
         char *towrite;
         if (delay <= 20)
@@ -143,7 +143,7 @@ int LisSensor::readEvents(sensors_event_t* data, int count)
             count--;
             numEventReceived++;
         } else {
-            LOGE("Lis331: unknown event (type=%d, code=%d)",
+            ALOGE("Lis331: unknown event (type=%d, code=%d)",
                     type, event->code);
         }
         mInputReader.next();

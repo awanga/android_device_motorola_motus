@@ -112,7 +112,7 @@ write_int(char const* path, int value)
         return amt == -1 ? -errno : 0;
     } else {
         if (already_warned == 0) {
-            LOGE("write_int failed to open %s\n", path);
+            ALOGE("write_int failed to open %s\n", path);
             already_warned = 1;
         }
         return -errno;
@@ -127,13 +127,13 @@ write_string(const char* file, const char* string, int len)
 
     fd = open(file, O_RDWR);
     if (fd < 0) {
-        LOGE("unable to open %s: %d\n", file, errno);
+        ALOGE("unable to open %s: %d\n", file, errno);
         return errno;
     }
 
     amt = write(fd, string, len);
     if (amt < 0) {
-        LOGE("unable to write to %s: %d\n", file, errno);
+        ALOGE("unable to write to %s: %d\n", file, errno);
     }
 
     close(fd);
@@ -155,7 +155,7 @@ handle_trackball_light_locked(struct light_device_t* dev)
     if (mode == 7 && g_backlight) {
         mode = 0;
     }
-    LOGV("%s g_backlight = %d, mode = %d, g_attention = %d\n",
+    ALOGV("%s g_backlight = %d, mode = %d, g_attention = %d\n",
         __func__, g_backlight, mode, g_attention);
 
     // If the value isn't changing, don't set it, because this
@@ -360,7 +360,7 @@ set_speaker_light_locked(struct light_device_t* dev,
 
     colorRGB = state->color;
  
-    LOGI("set_speaker_light_locked colorARGB=%08X, onMS=%d, offMS=%d, battfix=%d\n", 
+    ALOGI("set_speaker_light_locked colorARGB=%08X, onMS=%d, offMS=%d, battfix=%d\n", 
         colorRGB, onMS, offMS, battfix);
     
     // alpha of 0 or color of 0 means off
@@ -436,7 +436,7 @@ set_light_notifications(struct light_device_t* dev,
 {
     pthread_mutex_lock(&g_lock);
     g_notification = *state;
-    LOGV("set_light_notifications g_trackball=%d color=0x%08x",
+    ALOGV("set_light_notifications g_trackball=%d color=0x%08x",
             g_trackball, state->color);
     if (g_haveTrackballLight) {
         handle_trackball_light_locked(dev);
@@ -452,7 +452,7 @@ set_light_attention(struct light_device_t* dev,
 {
     pthread_mutex_lock(&g_lock);
     g_notification = *state;
-    LOGV("set_light_attention g_trackball=%d color=0x%08x",
+    ALOGV("set_light_attention g_trackball=%d color=0x%08x",
             g_trackball, state->color);
     if (state->flashMode == LIGHT_FLASH_HARDWARE) {
         g_attention = state->flashOnMS;
