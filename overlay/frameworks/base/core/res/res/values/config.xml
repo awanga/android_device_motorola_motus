@@ -87,31 +87,12 @@
     <string-array translatable="false" name="config_tether_dhcp_range">
     </string-array>
 
-    <!-- Regex array of allowable upstream ifaces for tethering - for example if you want
-         tethering on a new interface called "foo2" add <item>"foo\\d"</item> to the array -->
-    <string-array translatable="false" name="config_tether_upstream_regexs">
-        <item>rmnet\\d</item>
-        <item>eth\\d</item>
-    </string-array>
-
-    <!-- Boolean indicating if we require the use of DUN on mobile for tethering.
-         Note that this defaults to false so that if you move to a carrier that
-         hasn't configured anything tethering will still work.  If you'd rather
-         make the device untetherable on unconfigured devices, set to true -->
-    <bool translatable="false" name="config_tether_dun_required">false</bool>
-
     <!-- String containing the apn value for tethering.  May be overriden by secure settings
          TETHER_DUN_APN.  Value is a comma separated series of strings:
          "name,apn,proxy,port,username,password,server,mmsc,mmsproxy,mmsport,mcc,mnc,auth,type"
          note that empty fields can be ommitted: "name,apn,,,,,,,,,310,260,,DUN" -->
     <string translatable="false" name="config_tether_apndata"></string>
 
-
-    <!-- Flag indicating whether the keyguard should be bypassed when
-         the slider is open.  This can be set or unset depending how easily
-         the slider can be opened (for example, in a pocket or purse). -->
-    <bool name="config_bypass_keyguard_if_slider_open">false</bool>
-    
     <!-- Flag indicating whether the we should enable the automatic brightness in Settings.
          Software implementation will be used if config_hardware_auto_brightness_available is not set -->
     <bool name="config_automatic_brightness_available">true</bool>
@@ -290,27 +271,9 @@
     <!-- Enables swipe versus poly-finger touch disambiguation in the KeyboardView -->
     <bool name="config_swipeDisambiguation">true</bool>
 
-    <!-- Enables special filtering code in the framework for raw touch events
-         from the touch driver.  This code exists for one particular device,
-         and should not be enabled for any others.  Hopefully in the future
-         it will be removed when the lower-level touch driver generates better
-         data. -->
-    <bool name="config_filterTouchEvents">false</bool>
-
-    <!-- Enables special filtering code in the framework for raw touch events
-         from the touch driver. This code exists for one particular device,
-         and should not be enabled for any others. -->
-    <bool name="config_filterJumpyTouchEvents">false</bool>
-    
     <!-- Component name of the default wallpaper. This will be ImageWallpaper if not 
          specified -->
     <string name="default_wallpaper_component">@null</string>
-
-    <!-- Component name of the service providing network location support. -->
-    <string name="config_networkLocationProvider">com.google.android.location.NetworkLocationProvider</string>
-
-    <!-- Component name of the service providing geocoder API support. -->
-    <string name="config_geocodeProvider">com.google.android.location.GeocodeProvider</string>
 
     <!-- Boolean indicating if current platform supports bluetooth SCO for off call
     use cases -->
@@ -332,18 +295,10 @@
     <!-- 2 means give warning -->
     <integer name="config_datause_notification_type">2</integer>
 
-    <!-- Allows the light sensor to be ignored when flashlight is on -->
-    <bool name="config_flashlight_affects_lightsensor">false</bool>
-
-    <!-- Enable the screen-on animation -->
-    <bool name="config_enableScreenOnAnimation">false</bool>
-
-    <!-- Enable the screen-off animation -->
-    <bool name="config_enableScreenOffAnimation">false</bool>
-
     <!-- If this is true, the screen will fade off. -->
     <bool name="config_animateScreenLights">true</bool>
 
     <!-- Set this to true to get data working on some Motorola phones -->
+    <add-resource type="bool" name="config_rilNeedsNullPath"></add-resource>
     <bool name="config_rilNeedsNullPath">true</bool>
 </resources>

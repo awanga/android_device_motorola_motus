@@ -17,21 +17,4 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
            xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-    <!-- The list of packages that have access to data that is marked as being restricted -->
-    <string-array name="unrestricted_packages" translatable="false">
-
-        <item>com.android.contacts</item>
-        <item>com.facebook.katana</item>
-        <item>com.android.mms</item>
-        <item>com.google.android.gm</item>
-        <item>com.android.email</item>
-        <item>com.android.phone</item>
-        <item>com.google.android.apps.maps</item>
-        <item>com.android.globalsearch</item>
-        <item>com.android.calendar</item>
-        <item>com.google.android.talk</item>
-        <item>android</item>
-
-    </string-array>
-
 </resources>
