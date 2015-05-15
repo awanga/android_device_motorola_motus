@@ -53,6 +53,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 DEVICE_PACKAGE_OVERLAYS += device/motorola/motus/overlay
 
+# legacy version of skia
+PRODUCT_PACKAGES += \
+    libskia_legacy
+
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
     frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml:system/etc/permissions/android.hardware.camera.flash-autofocus.xml \
@@ -66,8 +70,10 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_PACKAGES += \
     librs_jni \
+    rild \
     dspexec \
     libbridge \
+    hwcomposer.default \
     gralloc.msm7k \
     copybit.motus \
     librpc \
@@ -83,7 +89,7 @@ PRODUCT_PACKAGES += \
     libaudio \
     rzscontrol \
     dexpreopt \
-    setrecovery
+    Launcher2
 
 DISABLE_DEXPREOPT := true
 
@@ -129,7 +135,7 @@ PRODUCT_COPY_FILES += \
 
 $(call inherit-product, build/target/product/full_base.mk)
 
-PRODUCT_NAME := full_motus
+PRODUCT_NAME := motus
 PRODUCT_DEVICE := motus
 PRODUCT_BRAND := Android
 PRODUCT_MODEL := Backflip
