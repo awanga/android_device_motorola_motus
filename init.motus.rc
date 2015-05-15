@@ -5,12 +5,13 @@ on init
     exec /sbin/charge_only_mode
 
 on fs
-# mount mtd partitions
+# mount mtd partitions and swap
     # Mount /system rw first to give the filesystem a chance to save a checkpoint
     mount yaffs2 mtd@system /system
     mount yaffs2 mtd@system /system ro remount
-    # mount yaffs2 mtd@userdata /data nosuid nodev
-    # mount yaffs2 mtd@cache /cache nosuid nodev
+    mount yaffs2 mtd@userdata /data nosuid nodev
+    mount yaffs2 mtd@cache /cache nosuid nodev
+    /sbin/rszcontrol /dev/ramzswap0 --init
     mount_all ./fstab.motus
     swapon_all /fstab.motus
 
