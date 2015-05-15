@@ -20,15 +20,17 @@
 # definition file).
 #
 
-# WARNING: This line must come *before* including the proprietary
-# variant, so that it gets overwritten by the parent (which goes
-# against the traditional rules of inheritance).
-USE_CAMERA_STUB := true
-
 # inherit from the proprietary version
 -include vendor/motorola/motus/BoardConfigVendor.mk
 
 TARGET_BOARD_INFO_FILE ?= device/motorola/motus/board-info.txt
+
+# Boot Animation
+#TARGET_SCREEN_HEIGHT := 800
+#TARGET_SCREEN_WIDTH := 480
+TARGET_BOOTANIMATION_PRELOAD := true
+TARGET_BOOTANIMATION_TEXTURE_CACHE := true
+TARGET_BOOTANIMATION_USE_RGB565 := true
 
 # Hardware
 TARGET_BOARD_PLATFORM := msm7k
@@ -49,7 +51,7 @@ TARGET_ARCH_LOWMEM := true
 
 # Kernel
 TARGET_PREBUILT_KERNEL := device/motorola/motus/kernel
-BOARD_KERNEL_CMDLINE := no_console_suspend=1 console=null quiet
+BOARD_KERNEL_CMDLINE := no_console_suspend=1 console=null earlyprintk quiet
 BOARD_USE_USB_MASS_STORAGE_SWITCH := true
 BOARD_CUSTOM_USB_CONTROLLER := ../../device/motorola/motus/UsbController.cpp
 
@@ -87,8 +89,8 @@ PRODUCT_AAPT_PREF_CONFIG := normal
 
 BOARD_BOOTIMAGE_PARTITION_SIZE := 0x00300000
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 0x00500000
-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 0x08ac0000
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 0x0df80000
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 0x12a00000 #0x08ac0000
+BOARD_USERDATAIMAGE_PARTITION_SIZE := 0x04040000 #0x0df80000
 BOARD_FLASH_BLOCK_SIZE := 131072
 
 # System
@@ -96,14 +98,15 @@ WITH_DEXPREOPT := false
 
 # Graphics
 BOARD_AVOID_DRAW_TEXTURE_EXTENSION := true
-TARGET_LIBAGL_USE_GRALLOC_COPYBITS := true
+BOARD_USE_SKIA_LCDTEXT := true
+BOARD_EGL_NEEDS_LEGACY_FB := true
 BOARD_EGL_CFG := device/motorola/motus/egl.cfg
+TARGET_DISABLE_TRIPLE_BUFFERING := true
+TARGET_LIBAGL_USE_GRALLOC_COPYBITS := true
 TARGET_SF_NEEDS_REAL_DIMENSIONS := true
 TARGET_SKIA_USE_MORE_MEMORY := true
-BOARD_USE_SKIA_LCDTEXT := true
-
-NUM_FRAMEBUFFER_SURFACE_BUFFERS := 2
 TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK := true
+NUM_FRAMEBUFFER_SURFACE_BUFFERS := 2
 
 # GPS
 BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := msm7k
@@ -114,6 +117,9 @@ BOARD_USES_GPSSHIM := false
 # Audio
 BOARD_USES_GENERIC_AUDIO := false
 TARGET_PROVIDES_LIBAUDIO := true
+
+# Power
+TARGET_POWERHAL_VARIANT := cm
 
 # Vibrator
 BOARD_HAS_VIBRATOR_IMPLEMENTATION := ../../device/motorola/motus/vibrator.c

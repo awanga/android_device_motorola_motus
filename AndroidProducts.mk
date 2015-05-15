@@ -18,5 +18,4 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/full_motus.mk \
-    $(LOCAL_DIR)/tiny_motus.mk
+    $(LOCAL_DIR)/motus.mk
