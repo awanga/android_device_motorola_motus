@@ -35,8 +35,9 @@ extern "C" {
 #define DEVICE_OUT_FM_HEADSET 0x0800
 #define DEVICE_OUT_FM_SPEAKER 0x1000
 
-namespace android {
-
+namespace android_audio_legacy {
+	using android::Mutex;
+	using android::SortedVector;
 // ----------------------------------------------------------------------------
 // Kernel driver interface
 //
@@ -150,7 +151,6 @@ public:
                                 status_t *status=0);
 
     virtual AudioStreamIn* openInputStream(
-
                                 uint32_t devices,
                                 int *format,
                                 uint32_t *channels,
@@ -260,6 +260,9 @@ private:
                 uint32_t    devices() { return mDevices; }
                 int         state() const { return mState; }
 
+        virtual status_t addAudioEffect(effect_handle_t effect) { return 0; }
+        virtual status_t removeAudioEffect(effect_handle_t effect) { return 0; }
+
     private:
                 AudioHardware* mHardware;
                 int         mFd;
@@ -292,7 +295,7 @@ private:
             int mPrevMode;
 
      friend class AudioStreamInMSM72xx;
-            Mutex       mLock;
+            Mutex mLock;
 
             int SND_DEVICE_CURRENT;
             int SND_DEVICE_HANDSET;
@@ -320,6 +323,6 @@ private:
 
 // ----------------------------------------------------------------------------
 
-}; // namespace android
+}; // namespace android_audio_legacy
 
 #endif // ANDROID_AUDIO_HARDWARE_MSM72XX_H
