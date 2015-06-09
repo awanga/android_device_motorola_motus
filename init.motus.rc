@@ -11,7 +11,7 @@ on fs
     mount yaffs2 mtd@system /system ro remount
     mount yaffs2 mtd@userdata /data nosuid nodev
     mount yaffs2 mtd@cache /cache nosuid nodev
-    /sbin/rszcontrol /dev/ramzswap0 --init
+    /system/xbin/rszcontrol /dev/ramzswap0 --init
     mount_all ./fstab.motus
     swapon_all /fstab.motus
 
