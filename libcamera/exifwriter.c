@@ -102,27 +102,27 @@ static void dump_to_file(const char *fname,
     int nw, cnt = 0;
     uint32_t written = 0;
 
-    LOGV("opening file [%s]\n", fname);
-    int fd = open(fname, O_RDWR | O_CREAT);
+    ALOGV("opening file [%s]\n", fname);
+    int fd = open(fname, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
     if (fd < 0) {
-        LOGE("failed to create file [%s]: %s", fname, strerror(errno));
+        ALOGE("failed to create file [%s]: %s", fname, strerror(errno));
         return;
     }
 
-    LOGV("writing %d bytes to file [%s]\n", size, fname);
+    ALOGV("writing %d bytes to file [%s]\n", size, fname);
     while (written < size) {
         nw = write(fd,
                      buf + written,
                      size - written);
         if (nw < 0) {
-            LOGE("failed to write to file [%s]: %s",
+            ALOGE("failed to write to file [%s]: %s",
                  fname, strerror(errno));
             break;
         }
         written += nw;
         cnt++;
     }
-    LOGV("done writing %d bytes to file [%s] in %d passes\n",
+    ALOGV("done writing %d bytes to file [%s] in %d passes\n",
          size, fname, cnt);
     close(fd);
 }
@@ -131,7 +131,7 @@ void writeExif( void *origData, void *destData , int origSize , uint32_t *result
   const char *filename = "/cache/tmp/temp.jpg";
 
     dump_to_file( filename, (uint8_t *)origData, origSize );
-    LOGV("WRITE EXIF Filename %s", filename);
+    ALOGV("WRITE EXIF Filename %s", filename);
     chmod( filename, S_IRWXU );
     ResetJpgfile();
 
@@ -141,10 +141,10 @@ void writeExif( void *origData, void *destData , int origSize , uint32_t *result
 
     int gpsTag = 0;
     if( pt != NULL ) {
-        LOGV("EXIF ADD GPS DATA ........");
+        ALOGV("EXIF ADD GPS DATA ........");
         gpsTag = 6;
     } else{
-        LOGV("EXIF NO GPS ........");
+        ALOGV("EXIF NO GPS ........");
     }
 
 
@@ -156,7 +156,7 @@ void writeExif( void *origData, void *destData , int origSize , uint32_t *result
     (*it).Format = FMT_USHORT;
     (*it).DataLength = 1;
     unsigned short v;
-    LOGV("EXIF Orientation %d", orientation);
+    ALOGV("EXIF Orientation %d", orientation);
     if( orientation == 90 ) {
         (*it).Value = "6\0";
     } else if( orientation == 180 ) {
@@ -199,9 +199,9 @@ void writeExif( void *origData, void *destData , int origSize , uint32_t *result
     (*it).GpsTag = FALSE;
 
     if( pt != NULL ) {
-        LOGV("pt->latitude == %f", pt->latitude );
-        LOGV("pt->longitude == %f", pt->longitude );
-        LOGV("pt->altitude == %d", pt->altitude );
+        ALOGV("pt->latitude == %f", pt->latitude );
+        ALOGV("pt->longitude == %f", pt->longitude );
+        ALOGV("pt->altitude == %d", pt->altitude );
 
         it++;
         (*it).Tag = 0x01;
@@ -216,7 +216,7 @@ void writeExif( void *origData, void *destData , int origSize , uint32_t *result
 
         it++;
         (*it).Value = coord2degminsec( pt->latitude );
-        LOGV("writeExif: latitude is: %s", (*it).Value);
+        ALOGV("writeExif: latitude is: %s", (*it).Value);
 
         (*it).Tag = 0x02;
         (*it).Format = FMT_URATIONAL;
@@ -236,7 +236,7 @@ void writeExif( void *origData, void *destData , int origSize , uint32_t *result
 
         it++;
         (*it).Value = coord2degminsec( pt->longitude );
-        LOGV("writeExif: longitude is: %s", (*it).Value);
+        ALOGV("writeExif: longitude is: %s", (*it).Value);
 
         (*it).Tag = 0x04;
         (*it).Format = FMT_URATIONAL;
@@ -256,7 +256,7 @@ void writeExif( void *origData, void *destData , int origSize , uint32_t *result
 
         it++;
         (*it).Value = float2rationnal( fabs( pt->altitude ) );
-        LOGV("writeExif: altitude is: %s", (*it).Value);
+        ALOGV("writeExif: altitude is: %s", (*it).Value);
 
         (*it).Tag = 0x06;
         (*it).Format = FMT_SRATIONAL;
@@ -272,15 +272,15 @@ void writeExif( void *origData, void *destData , int origSize , uint32_t *result
         }
     }
     strncpy(ImageInfo.FileName, filename, PATH_MAX);
-    LOGV("Image EXIF Filename %s", filename);
+    ALOGV("Image EXIF Filename %s", filename);
 
     ReadMode_t ReadMode;
     ReadMode = READ_METADATA;
     ReadMode |= READ_IMAGE;
     int res = ReadJpegFile(filename, (ReadMode_t)ReadMode );
-    LOGV("READ EXIF Filename %s", filename);
+    ALOGV("READ EXIF Filename %s", filename);
 
-    create_EXIF( t, EXIF_TOTAL_DATA, gpsTag);
+    create_EXIF( t, EXIF_TOTAL_DATA, gpsTag, TRUE);
 
     WriteJpegFile(filename);
     chmod( filename, S_IRWXU );

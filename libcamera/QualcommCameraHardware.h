@@ -17,10 +17,11 @@
 #ifndef ANDROID_HARDWARE_QUALCOMM_CAMERA_HARDWARE_H
 #define ANDROID_HARDWARE_QUALCOMM_CAMERA_HARDWARE_H
 
-#include <camera/CameraHardwareInterface.h>
+#include <device1/CameraHardwareInterface.h>
 #include <binder/MemoryBase.h>
 #include <binder/MemoryHeapBase.h>
 #include <utils/threads.h>
+#include <errno.h>
 #include <stdint.h>
 
 extern "C" {
@@ -259,9 +260,10 @@ public:
     void receiveJpegPictureFragment(uint8_t *buf, uint32_t size);
     void notifyShutter();
 
-private:
-    QualcommCameraHardware();
+    QualcommCameraHardware(const char *name);
     virtual ~QualcommCameraHardware();
+
+private:
     status_t startPreviewInternal();
     void stopPreviewInternal();
     friend void *auto_focus_thread(void *user);

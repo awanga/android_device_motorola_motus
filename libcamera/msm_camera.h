@@ -27,7 +27,7 @@
 #include <stdio.h>
 #include <sys/ioctl.h>
 #endif
-#include <linux/msm_adsp.h>
+#include "msm_adsp.h"
 
 
 #define MSM_CAM_IOCTL_MAGIC 'm'
