@@ -45,13 +45,14 @@ TARGET_PROVIDES_INIT_TARGET_RC := true
 TARGET_OTA_ASSERT_DEVICE := motu,motus
 BOARD_VENDOR_USE_AKMD := akm8973
 BOARD_USES_QCOM_LIBS := true
+BOARD_USES_QCOM_HARDWARE := true
 
 # Enable dalvik startup with a low memory footprint
 TARGET_ARCH_LOWMEM := true
 
 # Kernel
 TARGET_PREBUILT_KERNEL := device/motorola/motus/kernel
-BOARD_KERNEL_CMDLINE := no_console_suspend=1 console=null earlyprintk quiet
+BOARD_KERNEL_CMDLINE := no_console_suspend=1 console=null earlyprintk quiet mtdparts=msm_nand:3072k@45M(boot),305408k(system),65536k(userdata),256k(misc),5120k(recovery),98304k(cache),-(splash)
 BOARD_USE_USB_MASS_STORAGE_SWITCH := true
 BOARD_CUSTOM_USB_CONTROLLER := ../../device/motorola/motus/UsbController.cpp
 
@@ -108,6 +109,9 @@ TARGET_SKIA_USE_MORE_MEMORY := true
 TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK := true
 NUM_FRAMEBUFFER_SURFACE_BUFFERS := 2
 
+# Camera
+BOARD_NEEDS_MEMORYHEAPPMEM := true
+
 # GPS
 BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := msm7k
 BOARD_VENDOR_QCOM_GPS_LOC_API_AMSS_VERSION := 3200
@@ -115,6 +119,7 @@ BOARD_VENDOR_QCOM_AMSS_VERSION := 3200
 BOARD_USES_GPSSHIM := false
 
 # Audio
+BOARD_USES_LIBMEDIA_WITH_AUDIOPARAMETER := true
 BOARD_USES_GENERIC_AUDIO := false
 TARGET_PROVIDES_LIBAUDIO := true
 

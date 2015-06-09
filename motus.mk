@@ -40,6 +40,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
         ro.error.receiver.system.apps=com.google.android.feedback \
         ro.com.google.clientidbase=android-att-us \
         ro.com.google.locationfeatures=1 \
+	ro.sf.lcd_density=160 \
 	ro.config.low_ram=true \
         ro.config.vc_call_vol_steps=7 \
         ro.media.dec.aud.wma.enabled=1 \
@@ -73,6 +74,7 @@ PRODUCT_PACKAGES += \
     rild \
     dspexec \
     libbridge \
+    keystore.default \
     hwcomposer.default \
     gralloc.msm7k \
     copybit.motus \
@@ -84,11 +86,14 @@ PRODUCT_PACKAGES += \
     gps.msm7k \
     sensors.motus \
     lights.motus \
-    Torch \
-    libcamera \
-    libaudio \
+    power.motus \
+    audio.primary.motus \
+    audio.a2dp.default \
+    audio_policy.motus \
+    camera.motus \
     rzscontrol \
     dexpreopt \
+    Torch \
     Launcher2
 
 DISABLE_DEXPREOPT := true
